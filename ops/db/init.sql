@@ -1,0 +1,25 @@
+CREATE DATABASE db;
+
+\c db
+
+-- SETING TIMEZONE TO UTC
+SET timezone = 'UTC';
+
+CREATE TABLE IF NOT EXISTS migrations (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- CREATING ORDERS TABLE
+CREATE TABLE IF NOT EXISTS orders(
+  id UUID NOT NULL PRIMARY KEY DEFAULT gen_random_uuid(),
+  client VARCHAR(255) NOT NULL,
+  item VARCHAR(255) NOT NULL,
+  quantity SMALLINT NOT NULL,
+  observation VARCHAR(255), 
+  status VARCHAR(60) NOT NULL DEFAULT 'Pendente',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);

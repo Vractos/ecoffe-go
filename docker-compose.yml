@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  ecoffe-go:
+    container_name: ecoffe-server
+    build: .
+    image: ecoffe-server
+    ports:
+      - 8080:80
+    environment:
+      - APP_ENV=local
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB_NAME=${POSTGRES_DB_NAME}
+      - POSTGRES_HOST=postgres
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres_ecoffe
+    image: postgres:14.5
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./ops/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
