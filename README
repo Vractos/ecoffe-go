@@ -39,6 +39,11 @@ Siga os passos abaixo para configurar e executar o projeto usando Docker Compose
    docker-compose down
    ```
 
+## Arquitetura
+-	Entidades: Modelos centrais (`order.go`).
+-	Casos de Uso: Lógica de negócio em `usecases/`.
+-	Adaptadores: Integrações externas (`api/`).
+
 # Endpoints da API
 
 Abaixo estão exemplos de como interagir com a API usando comandos `curl`:

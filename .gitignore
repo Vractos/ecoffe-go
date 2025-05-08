@@ -16,13 +16,7 @@ bin
 # vendor/
 
 # Secrets
-.env
-
-.env*
-!.env.tpl
-!.env.example
-!.env.production
-.vercel
+# .env
 
 # Ignores 1password config folder in any directory
 **/.op/
